@@ -40,6 +40,6 @@ Name-filter fingerprints are derived from [David Sojevic's Profanity List](https
 
 Copyright (c) 2026 angychikngames.
 
-World Souls, including its code and artwork, is licensed under [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/). You can study, share, remix, and port it without asking. Give credit, keep it noncommercial, and share adaptations under the same license.
+World Souls, including its code and artwork, is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/). You can study, share, remix, and port it without asking. Give credit, keep it noncommercial, and share adaptations under the same license.
 
 The full license is in [LICENSE](LICENSE).

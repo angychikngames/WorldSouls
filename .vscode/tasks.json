@@ -4,11 +4,16 @@
         {
             "label": "Build World Souls",
             "type": "process",
-            "command": "${workspaceFolder}/gradlew",
+            "command": "bash",
             "windows": {
-                "command": "${workspaceFolder}\\gradlew.bat"
+                "command": "${workspaceFolder}\\gradlew.bat",
+                "args": [
+                    "build",
+                    "--console=plain"
+                ]
             },
             "args": [
+                "${workspaceFolder}/gradlew",
                 "build",
                 "--console=plain"
             ],
@@ -24,12 +29,38 @@
         {
             "label": "Run Minecraft client",
             "type": "process",
-            "command": "${workspaceFolder}/gradlew",
+            "command": "bash",
             "windows": {
-                "command": "${workspaceFolder}\\gradlew.bat"
+                "command": "${workspaceFolder}\\gradlew.bat",
+                "args": [
+                    "runClient",
+                    "--console=plain"
+                ]
             },
             "args": [
+                "${workspaceFolder}/gradlew",
                 "runClient",
+                "--console=plain"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "prepareRunClientCompile",
+            "type": "process",
+            "command": "bash",
+            "windows": {
+                "command": "${workspaceFolder}\\gradlew.bat",
+                "args": [
+                    "prepareRunClientCompile",
+                    "--console=plain"
+                ]
+            },
+            "args": [
+                "${workspaceFolder}/gradlew",
+                "prepareRunClientCompile",
                 "--console=plain"
             ],
             "options": {
