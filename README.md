@@ -45,6 +45,6 @@ Mod, icon, and dice artwork by angychikngames.
 
 Inspired by ConcernedApe's name generators and the worlds of World of Warcraft. World Souls is an unofficial fan project.
 
-Code and artwork are licensed under [CC BY-NC-SA 3.0](LICENSE). Name-filter fingerprints use data from [David Sojevic's Profanity List](https://github.com/dsojevic/profanity-list); its MIT notice is in [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES).
+Code and artwork are licensed under [CC BY-NC-SA 4.0](LICENSE). Name-filter fingerprints use data from [David Sojevic's Profanity List](https://github.com/dsojevic/profanity-list); its MIT notice is in [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES).
 
 ![The arrival title in Minecraft 1.20.1](docs/images/arrival-1.20.1.png)
