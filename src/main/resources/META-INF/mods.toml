@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="CC-BY-NC-SA-3.0"
+clientSideOnly=true
+
+[[mods]]
+modId="worldsouls"
+version="1.0.0"
+displayName="World Souls"
+logoFile="worldsouls.png"
+authors="angychikngames"
+description='''Roll a name for your world, then see it on arrival and in the pause menu.'''
+
+[[dependencies.worldsouls]]
+modId="forge"
+mandatory=true
+versionRange="[47.0.0,48)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.worldsouls]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="CLIENT"
