@@ -1,0 +1,15 @@
+[
+    {
+        "modid": "worldsouls",
+        "name": "World Souls",
+        "description": "Roll a name for your world, then see it on arrival and in the pause menu.",
+        "version": "1.0.0",
+        "mcversion": "1.12.2",
+        "authorList": [
+            "angychikngames"
+        ],
+        "logoFile": "worldsouls.png",
+        "screenshots": [],
+        "dependencies": []
+    }
+]
