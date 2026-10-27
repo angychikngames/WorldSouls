@@ -18,4 +18,4 @@ about: Something is broken or behaves unexpectedly
 
 ## Screenshots or relevant log
 
-Remove access tokens and any personal information before attaching logs.
+Remove any personal information before attaching logs.
