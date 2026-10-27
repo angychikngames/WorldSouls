@@ -18,33 +18,49 @@ Hopefully, one of them suits your world.
 
 Available for Minecraft Java Edition 1.12.2, 1.16.5, and 1.20.1 on Forge, and 26.3 on NeoForge.
 
-## Versions
+## World names in game
 
-| Minecraft Java Edition | Loader | Branch |
-| --- | --- | --- |
-| 1.12.2 | Forge | `forge-1.12.2` |
-| 1.16.5 | Forge | `forge-1.16.5` |
-| 1.20.1 | Forge | `forge-1.20.1` |
-| 26.3 | NeoForge | `neoforge-26.3` |
+Your saved world name fades in when you arrive, then fades out after about 3.5 seconds. It waits until loading is finished and the player camera is active. The name also appears at the top of the pause menu. Generated and custom names work the same way, including renamed worlds. This display uses the local saved world name in singleplayer or when hosting a LAN world.
 
 ## Installation
 
-Put the JAR for your Minecraft version and loader in your instance's `mods` folder. World Souls runs on the client. The world-name displays use the local saved name, including when hosting a LAN world.
+For Minecraft Java Edition 26.3 with NeoForge 26.3.0.99 or later in the 26.3 series.
 
-## Building
+Put `worldsouls-1.0.0.jar` in your instance's `mods` folder. The dice button appears under **Singleplayer > Create New World**.
 
-Switch to the branch for the Minecraft version you want to work on. Each version branch has its Gradle wrapper, build files, and `src/` at the repository root. `main` holds the project overview and shared documentation. Java requirements and build commands are in the README on each version branch.
+World Souls runs on the client and adds world naming and name displays.
 
-## Issues and contributions
+## Building from source
 
-Bug reports, ideas, ports, and pull requests are welcome. See [Contributing](CONTRIBUTING.md) if you would like to help.
+The project uses Java 25 and includes a Gradle wrapper.
 
-## Credits and license
+On Windows:
+
+```powershell
+.\gradlew.bat build
+```
+
+On Linux or macOS:
+
+```sh
+bash ./gradlew build
+```
+
+The built JAR is in `build/libs/`.
+
+To launch a development client, use `runClient` in place of `build`.
+
+## Credits
 
 Mod, icon, and dice artwork by angychikngames.
 
-Inspired by ConcernedApe's name generators and the worlds of World of Warcraft. World Souls is an unofficial fan project.
+Name-filter fingerprints are derived from [David Sojevic's Profanity List](https://github.com/dsojevic/profanity-list). Its MIT license is included in [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES).
 
-Code and artwork are licensed under [CC BY-NC-SA 3.0](LICENSE). Name-filter fingerprints use data from [David Sojevic's Profanity List](https://github.com/dsojevic/profanity-list); its MIT notice is in [THIRD-PARTY-NOTICES](THIRD-PARTY-NOTICES).
+## License
 
-![The arrival title in Minecraft 1.20.1](docs/images/arrival-1.20.1.png)
+Copyright (c) 2026 angychikngames.
+
+World Souls, including its code and artwork, is licensed under [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/). You can study, share, remix, and port it without asking. Give credit, keep it noncommercial, and share adaptations under the same license.
+
+The full license is in [LICENSE](LICENSE).
+

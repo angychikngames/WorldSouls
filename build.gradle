@@ -1,0 +1,32 @@
+plugins {
+    id 'java-library'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+version = '1.0.0'
+group = 'com.angychikngames.worldsouls'
+base { archivesName = 'worldsouls' }
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
+
+neoForge {
+    enable {
+        version = '26.3.0.99'
+        disableRecompilation = true
+    }
+    runs {
+        client { client() }
+    }
+    mods {
+        worldsouls { sourceSet(sourceSets.main) }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+tasks.named('jar') {
+    from('LICENSE')
+    from('THIRD-PARTY-NOTICES')
+}

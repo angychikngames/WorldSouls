@@ -1,0 +1,28 @@
+license="CC-BY-NC-SA-3.0"
+
+[[mods]]
+modId="worldsouls"
+version="1.0.0"
+displayName="World Souls"
+iconFile="worldsouls.png"
+authors="angychikngames"
+description='''Roll a name for your world, then see it on arrival and in the pause menu.'''
+
+[[dependencies.worldsouls]]
+modId="neoforge"
+type="required"
+versionRange="[26.3.0.99,26.4)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.worldsouls]]
+modId="minecraft"
+type="required"
+versionRange="[26.3]"
+ordering="NONE"
+side="CLIENT"
+
+
+
+
+
