@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build World Souls",
+            "type": "process",
+            "command": "${workspaceFolder}/gradlew",
+            "windows": {
+                "command": "${workspaceFolder}\\gradlew.bat"
+            },
+            "args": [
+                "build",
+                "--console=plain"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Run Minecraft client",
+            "type": "process",
+            "command": "${workspaceFolder}/gradlew",
+            "windows": {
+                "command": "${workspaceFolder}\\gradlew.bat"
+            },
+            "args": [
+                "runClient",
+                "--console=plain"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
