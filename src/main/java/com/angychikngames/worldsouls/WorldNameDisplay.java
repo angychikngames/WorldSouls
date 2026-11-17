@@ -22,7 +22,7 @@ public class WorldNameDisplay {
             titleTicks = 0;
         }
         worldName = name;
-        if (world == null || !ready) {
+        if (world == null || (!ready && titleTicks == 0)) {
             readyTicks = 0;
             return;
         }
