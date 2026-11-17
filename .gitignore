@@ -20,3 +20,4 @@ bin/
 .project
 .settings/
 .vscode/launch.json
+/.eclipse/configurations/Client.launch
