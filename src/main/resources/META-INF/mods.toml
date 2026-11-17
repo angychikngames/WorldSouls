@@ -4,11 +4,11 @@ license="CC-BY-NC-SA-4.0"
 
 [[mods]]
 modId="worldsouls"
-version="1.0.0"
+version="1.0.1"
 displayName="World Souls"
 logoFile="worldsouls.png"
 authors="angychikngames"
-description='''Roll a name for your world, then see it on arrival and in the pause menu.'''
+description='''roll a random name for your world'''
 
 [[dependencies.worldsouls]]
 modId="forge"
