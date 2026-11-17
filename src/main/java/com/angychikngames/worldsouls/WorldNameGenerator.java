@@ -4,21 +4,22 @@ import java.util.Random;
 
 public final class WorldNameGenerator {
     private static final String[] STARTS = {
-        "a", "e", "i", "o", "u", "ae", "es", "il", "nu", "ar", "nei", "or",
-        "aur", "el", "isa", "quel", "za", "ze"
+        "a", "e", "i", "o", "u", "al", "ar", "el", "il", "or", "ur", "av", "an",
+        "en", "ir", "is", "az", "ath", "ner", "mor", "tal", "vel", "ser", "dal",
+        "sol", "ter", "cal", "mar", "lor", "var", "tor", "num", "ara", "ela",
+        "ava", "ori", "eru", "ivo", "ona", "ily", "sela", "nora", "ael", "dara", "sora"
     };
-    private static final String[] ACCENT_STARTS = {
-        "az", "ith", "vyl", "q", "qu", "zh"
+    private static final String[] MIDDLES = {
+        "la", "le", "li", "ra", "re", "ri", "ro", "ma", "me", "mi",
+        "na", "ne", "ni", "no", "va", "ve", "sa", "se", "ta", "te", "da", "de"
     };
-    private static final String[] CONSONANTS = {
-        "v", "l", "r", "n", "m", "z", "qu"
-    };
-    private static final String[] ACCENT_CONSONANTS = {
-        "th", "sk", "k", "s", "h", "t", "q", "zh", "c"
-    };
-    private static final String[] SYLLABLES = {
-        "mea", "elia", "sera", "thea", "oria", "ara", "ielle", "ira",
-        "elle", "wyn", "eth", "is", "os", "une", "quel", "za", "zen"
+    private static final String[] ENDINGS = {
+        "a", "e", "i", "o", "u", "an", "en", "in", "on", "un", "al", "el", "il",
+        "ol", "ar", "er", "ir", "or", "is", "as", "os", "eth", "oth", "us", "urn",
+        "ath", "rel", "ren", "riel", "ran", "rin", "ron", "lan", "len", "lin",
+        "lon", "lar", "lor", "nal", "nel", "nor", "val", "ven", "van", "mar",
+        "mir", "mor", "men", "mun", "mea", "ra", "ru", "la", "li", "na", "nu",
+        "va", "via", "ria", "lia", "ena", "ela", "ora", "ara", "ira", "ila"
     };
     private static final String[] REFERENCE_STARTS = {
         "tatoo", "nab", "alder", "corus", "dan", "korri", "ty",
@@ -78,7 +79,7 @@ public final class WorldNameGenerator {
         "ion", "rica", "bol", "lifrey", "aro", "tera", "lorn",
         "raea", "dora", "ena", "emis", "llo", "cate", "phone",
         "meter", "ra", "mes", "don", "nysus", "estus", "a",
-        "x", "lene", "os", "lios", "eria", "ea", "anus",
+        "x", "lene", "os", "lios", "eria", "ea",
         "ys", "nus", "ta", "res", "erva", "piter", "tune",
         "turn", "cury", "to", "din", "gg", "ya", "r",
         "ki", "unn", "rd", "dr", "f", "sis", "siris",
@@ -98,69 +99,53 @@ public final class WorldNameGenerator {
         "rti", "kun", "lus", "tesh", "tu", "lana", "galus",
         "gara", "ronda", "gar", "sya", "rea", "ka"
     };
-    private static final String[] VOWELS = {
-        "a", "e", "i", "o", "u", "ae", "ia", "ai", "ei", "y"
-    };
-    private static final String[] ENDINGS = {
-        "n", "th", "oth", "us", "ar", "or"
-    };
     private static final String[] DESIGNATIONS = {
         "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII",
         "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX"
     };
-    private static final int[] LENGTHS = {2, 2, 2, 3, 3, 4};
 
     private WorldNameGenerator() {
     }
 
     public static String generate(Random random) {
-        if (random.nextInt(100) == 0) {
-            StringBuilder candidate = new StringBuilder(REFERENCE_STARTS[random.nextInt(REFERENCE_STARTS.length)]);
-            candidate.append(REFERENCE_SYLLABLES[random.nextInt(REFERENCE_SYLLABLES.length)]);
-            if (candidate.length() >= 3 && candidate.length() <= 16 && !NameFilter.isBlocked(candidate.toString())) {
-                candidate.setCharAt(0, Character.toUpperCase(candidate.charAt(0)));
-                return addDesignation(candidate.toString(), random);
-            }
-        }
-        boolean guided = random.nextInt(100) >= 15;
-        StringBuilder name;
+        boolean referenceRoll = random.nextInt(100) == 0;
+        int vowelLimit = referenceRoll || random.nextInt(8) == 0 ? 2 : 1;
+        // borrow one reference piece on about half the regular rolls
+        int referencePiece = referenceRoll ? 0 : random.nextInt(4);
+        String[] starts = referenceRoll || referencePiece == 0 ? REFERENCE_STARTS : STARTS;
+        String[] endings = referenceRoll || referencePiece == 1 ? REFERENCE_SYLLABLES : ENDINGS;
+        String name;
         do {
-            String[] starts;
-            if (random.nextInt(5) == 0) {
-                starts = REFERENCE_STARTS;
-            } else {
-                starts = random.nextInt(4) == 0 ? ACCENT_STARTS : STARTS;
+            String start = starts[random.nextInt(starts.length)];
+            String middle = !referenceRoll && random.nextInt(4) == 0
+                    ? MIDDLES[random.nextInt(MIDDLES.length)] : "";
+            String ending = endings[random.nextInt(endings.length)];
+
+            boolean apostrophe = !referenceRoll && random.nextInt(20) == 0 && start.length() > 1;
+            if (apostrophe) {
+                start += "'";
             }
-            name = new StringBuilder(starts[random.nextInt(starts.length)]);
-            int length = LENGTHS[random.nextInt(LENGTHS.length)];
-            int apostrophe = random.nextInt(10) == 0 ? 1 + random.nextInt(length - 1) : -1;
-            for (int i = 1; i < length; i++) {
-                if (i == apostrophe) {
-                    name.append('\'');
-                }
-                for (int attempt = 0; attempt < 4; attempt++) {
-                    String syllable;
-                    if (random.nextInt(3) == 0) {
-                        String[] syllables = random.nextInt(5) == 0 ? REFERENCE_SYLLABLES : SYLLABLES;
-                        syllable = syllables[random.nextInt(syllables.length)];
-                    } else {
-                        String[] consonants = random.nextInt(8) == 0 ? ACCENT_CONSONANTS : CONSONANTS;
-                        syllable = consonants[random.nextInt(consonants.length)]
-                                + VOWELS[random.nextInt(VOWELS.length)];
-                    }
-                    if (!guided || !awkwardJoin(name.toString(), syllable) || attempt == 3) {
-                        name.append(syllable);
-                        break;
-                    }
-                }
-            }
-            if (random.nextInt(6) == 0) {
-                name.append(ENDINGS[random.nextInt(ENDINGS.length)]);
-            }
-        } while (name.length() < 3 || name.length() > 16 || NameFilter.isBlocked(name.toString()));
-        name.setCharAt(0, Character.toUpperCase(name.charAt(0)));
-        return addDesignation(name.toString(), random);
+            name = join(join(start, middle), ending);
+        } while (name.length() < 3 || name.length() > 16
+                || busySounds(name, vowelLimit) || NameFilter.isBlocked(name));
+        name = Character.toUpperCase(name.charAt(0)) + name.substring(1);
+        return addDesignation(name, random);
     }
+
+    private static String join(String left, String right) {
+        if (right.isEmpty()) {
+            return left;
+        }
+        char last = left.charAt(left.length() - 1);
+        char first = right.charAt(0);
+        // give a closed syllable a short vowel before another consonant
+        if (last != '\'' && "aeiouy".indexOf(last) < 0
+                && "aeiouy".indexOf(first) < 0 && "lrnm".indexOf(last) < 0) {
+            return left + "a" + right;
+        }
+        return left + right;
+    }
+
     private static String addDesignation(String name, Random random) {
         if (random.nextInt(20) == 0) {
             int index = random.nextInt(10) == 0
@@ -173,32 +158,27 @@ public final class WorldNameGenerator {
         }
         return name;
     }
-    private static boolean awkwardJoin(String left, String right) {
-        for (String group : new String[] {"th", "kh", "zh", "qu"}) {
-            left = left.replace(group, group.substring(0, 1));
-            right = right.replace(group, group.substring(0, 1));
+    private static boolean busySounds(String name, int vowelLimit) {
+        if (name.matches(".*(?:th|kh|zh|sh|ch|ph|qu|[jkqxz])'?(?:th|kh|zh|sh|ch|ph|qu|[jkqxz]).*")
+                || name.matches(".*(th|kh|zh|sh|ch|ph)[aeiouy]+\1.*")) {
+            return true;
         }
-        char last = left.charAt(left.length() - 1);
-        if (last == '\'') {
-            return false;
+
+        String sounds = name.replace("qu", "q").replaceAll("(th|kh|zh|sh|ch|ph)", "h");
+        if (sounds.matches(".*[^aeiouy']{3}.*")) {
+            return true;
         }
-        boolean vowel = "aeiouy".indexOf(last) >= 0;
-        int count = 0;
-        for (int i = left.length() - 1; i >= 0; i--) {
-            char c = left.charAt(i);
-            if (c == '\'' || ("aeiouy".indexOf(c) >= 0) != vowel) {
-                break;
+        int pairs = 0;
+        for (int i = 1; i < sounds.length(); i++) {
+            if ("aeiou".indexOf(sounds.charAt(i - 1)) >= 0 && "aeiou".indexOf(sounds.charAt(i)) >= 0) {
+                // once is enough for the same vowel pair
+                if (sounds.indexOf(sounds.substring(i - 1, i + 1), i) >= 0) {
+                    return true;
+                }
+                pairs++;
             }
-            count++;
         }
-        int before = count;
-        for (int i = 0; i < right.length(); i++) {
-            if (("aeiouy".indexOf(right.charAt(i)) >= 0) != vowel) {
-                break;
-            }
-            count++;
-        }
-        return count > before && count > 2;
+        return pairs > vowelLimit;
     }
 }
 
