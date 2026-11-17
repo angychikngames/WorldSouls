@@ -110,10 +110,20 @@ public final class WorldNameGenerator {
     public static String generate(Random random) {
         boolean referenceRoll = random.nextInt(100) == 0;
         int vowelLimit = referenceRoll || random.nextInt(8) == 0 ? 2 : 1;
-        // borrow one reference piece on about half the regular rolls
-        int referencePiece = referenceRoll ? 0 : random.nextInt(4);
-        String[] starts = referenceRoll || referencePiece == 0 ? REFERENCE_STARTS : STARTS;
-        String[] endings = referenceRoll || referencePiece == 1 ? REFERENCE_SYLLABLES : ENDINGS;
+        String[] starts = STARTS;
+        String[] endings = ENDINGS;
+        if (referenceRoll) {
+            starts = REFERENCE_STARTS;
+            endings = REFERENCE_SYLLABLES;
+        } else {
+            // borrow one reference piece on about half the regular rolls
+            int referencePiece = random.nextInt(4);
+            if (referencePiece == 0) {
+                starts = REFERENCE_STARTS;
+            } else if (referencePiece == 1) {
+                endings = REFERENCE_SYLLABLES;
+            }
+        }
         String name;
         do {
             String start = starts[random.nextInt(starts.length)];
