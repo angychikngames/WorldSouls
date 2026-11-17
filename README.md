@@ -10,7 +10,7 @@ World Souls adds a dice button beside the World Name field on the Create World s
 
 Your world's name also appears briefly when you load in and stays visible in the pause menu. Writing lore with a book and quill but forgot what eldritch abomination the generator came up with? Press Escape. Saves you quitting out just to check.
 
-Names are assembled from randomized syllables, blending soft vowels with older, stranger sounds. They range from 3 to 16 characters long, with over 181 million possible names.
+Names are assembled from randomized syllables. They range from 3 to 16 characters long, with over 181 million possible names.
 
 And, in accordance with Sturgeon's Law, 90% of everything is crap. Some rolls will be ancient and mysterious. Some will be beautiful accidents. Some will be Bellolooszy.
 
