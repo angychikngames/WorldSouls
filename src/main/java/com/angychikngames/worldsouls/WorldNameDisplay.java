@@ -10,6 +10,11 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.AbstractGui;
 
 public class WorldNameDisplay {
+    private static final int READY_DELAY_TICKS = 10;
+    private static final int TITLE_DURATION_TICKS = 70;
+    private static final int FADE_IN_TICKS = 15;
+    private static final int FADE_OUT_TICKS = 20;
+
     private static Object currentWorld;
     private static String worldName = "";
     private static int readyTicks;
@@ -22,20 +27,21 @@ public class WorldNameDisplay {
             titleTicks = 0;
         }
         worldName = name;
+        // let the title finish even if the player opens a menu
         if (world == null || (!ready && titleTicks == 0)) {
             readyTicks = 0;
             return;
         }
-        if (readyTicks < 10) {
+        if (readyTicks < READY_DELAY_TICKS) {
             readyTicks++;
-        } else if (titleTicks < 70) {
+        } else if (titleTicks < TITLE_DURATION_TICKS) {
             titleTicks++;
         }
     }
 
     private static int titleColor(float partialTick) {
         float time = titleTicks - 1 + partialTick;
-        float opacity = Math.min(time / 15.0F, (70.0F - time) / 20.0F);
+        float opacity = Math.min(time / FADE_IN_TICKS, (TITLE_DURATION_TICKS - time) / FADE_OUT_TICKS);
         int alpha = (int) (255.0F * Math.max(0.0F, Math.min(1.0F, opacity)));
         return alpha < 4 ? 0 : (alpha << 24) | 0xEFE6D2;
     }
@@ -78,8 +84,8 @@ public class WorldNameDisplay {
         if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
             return;
         }
-        if (currentWorld == null || worldName.isEmpty() || readyTicks < 10
-                || titleTicks == 0 || titleTicks >= 70 || minecraft.screen != null
+        if (currentWorld == null || worldName.isEmpty() || readyTicks < READY_DELAY_TICKS
+                || titleTicks == 0 || titleTicks >= TITLE_DURATION_TICKS || minecraft.screen != null
                 || minecraft.options.hideGui) {
             return;
         }

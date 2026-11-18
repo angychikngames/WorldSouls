@@ -1,8 +1,18 @@
 package com.angychikngames.worldsouls;
 
 import java.util.Random;
+import java.util.regex.Pattern;
 
 public final class WorldNameGenerator {
+    private static final Pattern HARD_SOUND_TUPLE =
+            Pattern.compile(".*(?:th|kh|zh|sh|ch|ph|qu|[jkqxz])'?(?:th|kh|zh|sh|ch|ph|qu|[jkqxz]).*");
+    private static final Pattern REPEATED_SOUND_PAIR =
+            Pattern.compile(".*(th|kh|zh|sh|ch|ph)[aeiouy]+\1.*");
+    private static final Pattern SOUND_PAIR = Pattern.compile("(th|kh|zh|sh|ch|ph)");
+    private static final Pattern CONSONANT_RUN = Pattern.compile(".*[^aeiouy']{3}.*");
+    private static final Pattern REPEATED_CONSONANT_AT_APOSTROPHE =
+            Pattern.compile("([bcdfghjklmnpqrstvwxz])'\\1");
+
     private static final String[] STARTS = {
         "a", "e", "i", "o", "u", "al", "ar", "el", "il", "or", "ur", "av", "an",
         "en", "ir", "is", "az", "ath", "ner", "mor", "tal", "vel", "ser", "dal",
@@ -169,13 +179,14 @@ public final class WorldNameGenerator {
         return name;
     }
     private static boolean busySounds(String name, int vowelLimit) {
-        if (name.matches(".*(?:th|kh|zh|sh|ch|ph|qu|[jkqxz])'?(?:th|kh|zh|sh|ch|ph|qu|[jkqxz]).*")
-                || name.matches(".*(th|kh|zh|sh|ch|ph)[aeiouy]+\1.*")) {
+        if (REPEATED_CONSONANT_AT_APOSTROPHE.matcher(name).find()
+                || HARD_SOUND_TUPLE.matcher(name).matches()
+                || REPEATED_SOUND_PAIR.matcher(name).matches()) {
             return true;
         }
 
-        String sounds = name.replace("qu", "q").replaceAll("(th|kh|zh|sh|ch|ph)", "h");
-        if (sounds.matches(".*[^aeiouy']{3}.*")) {
+        String sounds = SOUND_PAIR.matcher(name.replace("qu", "q")).replaceAll("h");
+        if (CONSONANT_RUN.matcher(sounds).matches()) {
             return true;
         }
         int pairs = 0;

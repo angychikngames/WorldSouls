@@ -59,11 +59,11 @@ public class ClientEvents {
 
         private DiceButton(CreateWorldScreen screen, TextFieldWidget name) {
             super(0, 0, 20, 20, new StringTextComponent(""), button -> {
-                String next;
+                String rolledName;
                 do {
-                    next = WorldNameGenerator.generate(RANDOM);
-                } while (next.equals(name.getValue()));
-                name.setValue(next);
+                    rolledName = WorldNameGenerator.generate(RANDOM);
+                } while (rolledName.equals(name.getValue()));
+                name.setValue(rolledName);
             }, (button, matrix, mouseX, mouseY) -> screen.renderTooltip(matrix,
                     new TranslationTextComponent("worldsouls.generate"), mouseX, mouseY));
             this.name = name;
