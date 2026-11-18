@@ -67,13 +67,14 @@ public class ClientEvents {
         }
 
         private void roll() {
-            String next;
+            String rolledName;
             do {
-                next = WorldNameGenerator.generate(RANDOM);
-            } while (next.equals(name.getText()));
-            name.setText(next);
+                rolledName = WorldNameGenerator.generate(RANDOM);
+            } while (rolledName.equals(name.getText()));
+            name.setText(rolledName);
+            // changing the textbox alone leaves the folder preview stale
             try {
-                SAVED_NAME.set(screen, next);
+                SAVED_NAME.set(screen, rolledName);
                 UPDATE_FOLDER.invoke(screen);
             } catch (ReflectiveOperationException e) {
                 throw new IllegalStateException("World Souls could not update the world name", e);
