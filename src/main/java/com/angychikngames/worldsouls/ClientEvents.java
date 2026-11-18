@@ -56,11 +56,11 @@ public class ClientEvents {
 
         private DiceButton(CreateWorldScreen screen, EditBox name) {
             super(0, 0, 20, 20, Component.empty(), button -> {
-                String next;
+                String rolledName;
                 do {
-                    next = WorldNameGenerator.generate(RANDOM);
-                } while (next.equals(name.getValue()));
-                name.setValue(next);
+                    rolledName = WorldNameGenerator.generate(RANDOM);
+                } while (rolledName.equals(name.getValue()));
+                name.setValue(rolledName);
             }, supplier -> Component.translatable("worldsouls.generate"));
             this.screen = screen;
             this.name = name;
