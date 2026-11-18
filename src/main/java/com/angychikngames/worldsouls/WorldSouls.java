@@ -59,11 +59,11 @@ public class WorldSouls {
         private DiceButton(CreateWorldScreen screen, EditBox name) {
             super(0, 0, 20, 20, Component.translatable("worldsouls.generate"),
                     button -> {
-                        String next;
+                        String rolledName;
                         do {
-                            next = WorldNameGenerator.generate(RANDOM);
-                        } while (next.equals(name.getValue()));
-                        name.setValue(next);
+                            rolledName = WorldNameGenerator.generate(RANDOM);
+                        } while (rolledName.equals(name.getValue()));
+                        name.setValue(rolledName);
                     }, DEFAULT_NARRATION);
             this.screen = screen;
             this.name = name;
